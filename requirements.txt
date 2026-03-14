@@ -1,0 +1,28 @@
+# AWS
+boto3
+
+# Google Sheets
+gspread
+google-auth
+
+# Database
+psycopg2-binary
+sqlalchemy
+
+# Data processing
+pandas
+pyarrow
+fastparquet
+
+# Azure / Fabric
+azure-storage-file-datalake
+azure-identity
+
+# Environment
+python-dotenv
+
+# Airflow (later)
+apache-airflow
+
+# dbt (later)
+dbt-fabric
