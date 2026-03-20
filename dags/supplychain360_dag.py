@@ -2,9 +2,9 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
-from data_ingestion.get_s3_files import transfer_s3_files
-from data_ingestion.get_gsheet_data import get_gsheet_data
-from data_ingestion.get_postgres_data import get_postgres_data
+from ingestion.get_s3_files import transfer_s3_files
+from ingestion.get_gsheet_data import get_gsheet_data
+from ingestion.get_postgres_data import get_postgres_data
 
 # default arguments for the dag
 default_args = {
