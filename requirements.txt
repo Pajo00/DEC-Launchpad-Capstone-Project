@@ -1,28 +1,11 @@
-# AWS
-boto3
-
-# Google Sheets
 gspread
 google-auth
-
-# Database
+dbt-core
+dbt-redshift
+astronomer-cosmos
 psycopg2-binary
-sqlalchemy
-
-# Data processing
+apache-airflow-providers-amazon
+apache-airflow-providers-google
 pandas
 pyarrow
-fastparquet
-
-# Azure / Fabric
-azure-storage-file-datalake
-azure-identity
-
-# Environment
-python-dotenv
-
-# Airflow (later)
 apache-airflow
-
-# dbt (later)
-dbt-fabric

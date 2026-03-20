@@ -1,31 +1,17 @@
-# Python
 __pycache__/
 *.pyc
 *.pyo
 .env
 venv/
 *.egg-info/
-
-# Credentials - NEVER commit these
 *.json
 service_account*.json
 credentials*.json
-
-# Environment variables
 .env
 .env.*
-
-# dbt
-dbt/target/
-dbt/logs/
-dbt/.user.yml
-
-# Terraform
-terraform/.terraform/
-terraform/*.tfstate
-terraform/*.tfstate.backup
-terraform/*.tfvars
-
-# OS
+*.hcl
+*.tfstate
+*.terraform
 .DS_Store
 Thumbs.db
+*logs
