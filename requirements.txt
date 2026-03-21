@@ -1,11 +1,8 @@
-gspread
-google-auth
-dbt-core
-dbt-redshift
-astronomer-cosmos
-psycopg2-binary
-apache-airflow-providers-amazon
-apache-airflow-providers-google
 pandas
 pyarrow
-apache-airflow
+psycopg2-binary
+gspread
+google-auth
+astronomer-cosmos
+dbt-redshift
+dbt-core
