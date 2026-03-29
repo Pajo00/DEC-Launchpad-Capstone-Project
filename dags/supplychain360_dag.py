@@ -2,12 +2,12 @@ from airflow.sdk import DAG
 from pendulum import datetime
 from datetime import timedelta
 from airflow.providers.standard.operators.python import PythonOperator
+from airflow.providers.standard.sensors.time_delta import TimeDeltaSensor
 from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig
 from cosmos.profiles import RedshiftUserPasswordProfileMapping
-
-from data_ingestion.get_s3_files import transfer_s3_files
-from data_ingestion.get_gsheet_data import get_gsheet_data
-from data_ingestion.get_postgres_data import get_postgres_data
+from ingestion.get_s3_files import transfer_s3_files
+from ingestion.get_gsheet_data import get_gsheet_data
+from ingestion.get_postgres_data import get_postgres_data
 
 # configure dbt profile
 profile_config = ProfileConfig(
@@ -33,11 +33,12 @@ def failure_callback(context):
 
 # default args for the dag
 default_args = {
-    "owner": "joshua",
-    "email_on_failure": False,
+    "owner": "Joshua-Launchpad-Capstone",
+    "email": "akinspajo@gmail.com",
+    "email_on_failure": True,
     "email_on_retry": False,
     "retries": 1,
-    "retry_delay": timedelta(minutes=5),
+    "retry_delay": timedelta(minutes=1),
     "on_success_callback": success_callback,
     "on_failure_callback": failure_callback
 }
@@ -45,14 +46,14 @@ default_args = {
 # define the dag
 with DAG(
     dag_id="supplychain360_pipeline",
-    start_date=datetime(2026, 3, 10),
-    schedule=None,
+    start_date=datetime(2026, 3, 23),
+    schedule='@daily',
     default_args=default_args,
     catchup=False,
     tags=["supplychain360", "ingestion", "dbt"],
 ) as dag:
 
-    # extract static files from bootcamp s3 bucket
+    # extract static files from s3 bucket
     ingest_s3_files = PythonOperator(
         task_id="ingest_s3_files",
         python_callable=transfer_s3_files,
@@ -70,6 +71,12 @@ with DAG(
         python_callable=get_postgres_data,
     )
 
+    # Wait for 10 seconds before running dbt models
+    wait_10_secs = TimeDeltaSensor(
+        task_id='wait_10_seconds',
+        delta=timedelta(seconds=10)
+    )
+
     # run dbt models after all ingestion is complete
     run_dbt_models = DbtTaskGroup(
         group_id="run_dbt_models",
@@ -78,6 +85,5 @@ with DAG(
         default_args={"retries": 2}
     )
 
-    # all three ingestion tasks run in parallel
-    # then dbt runs after all three complete
-    [ingest_s3_files, ingest_gsheet_data, ingest_postgres_data] >> run_dbt_models
+    # Define task dependencies
+    [ingest_s3_files, ingest_gsheet_data, ingest_postgres_data] >> wait_10_secs >> run_dbt_models

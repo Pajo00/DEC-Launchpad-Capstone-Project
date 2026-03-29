@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: fact_sales
+    description: "fact table for all sales transactions enriched with product and store info"
+    columns:
+      - name: transaction_id
+        description: "unique identifier for each sales transaction"
+        data_tests:
+          - unique
+          - not_null
+      - name: store_id
+        description: "foreign key to dim_stores"
+        data_tests:
+          - not_null
+      - name: product_id
+        description: "foreign key to dim_products"
+        data_tests:
+          - not_null
+      - name: sale_amount
+        description: "total sale amount after discount"
+        data_tests:
+          - not_null
+
+  - name: fact_inventory
+    description: "fact table for daily inventory snapshots per warehouse and product"
+    columns:
+      - name: warehouse_id
+        description: "foreign key to dim_warehouses"
+        data_tests:
+          - not_null
+      - name: product_id
+        description: "foreign key to dim_products"
+        data_tests:
+          - not_null
+      - name: snapshot_date
+        description: "date of the inventory snapshot"
+        data_tests:
+          - not_null
+
+  - name: fact_shipments
+    description: "fact table for all shipment delivery records"
+    columns:
+      - name: shipment_id
+        description: "unique identifier for each shipment"
+        data_tests:
+          - unique
+          - not_null
+      - name: is_late_delivery
+        description: "flag indicating if delivery was late"
+        data_tests:
+          - not_null

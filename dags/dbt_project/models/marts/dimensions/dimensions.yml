@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "product dimension enriched with supplier information"
+    columns:
+      - name: product_id
+        description: "unique identifier for each product"
+        data_tests:
+          - unique
+          - not_null
+      - name: supplier_id
+        description: "foreign key to suppliers"
+        data_tests:
+          - not_null
+
+  - name: dim_suppliers
+    description: "supplier dimension table"
+    columns:
+      - name: supplier_id
+        description: "unique identifier for each supplier"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_warehouses
+    description: "warehouse dimension table"
+    columns:
+      - name: warehouse_id
+        description: "unique identifier for each warehouse"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_stores
+    description: "store locations dimension table"
+    columns:
+      - name: store_id
+        description: "unique identifier for each store"
+        data_tests:
+          - unique
+          - not_null

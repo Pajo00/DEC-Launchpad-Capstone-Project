@@ -1,0 +1,55 @@
+version: 2
+
+sources:
+  - name: raw_db
+    description: "raw data ingested from all source systems into redshift"
+    schema: raw
+    tables:
+      - name: products
+        description: "raw products data from s3"
+        freshness:
+          warn_after: {count: 7, period: day}
+          error_after: {count: 30, period: day}
+        loaded_at_field: ingested_at
+
+      - name: suppliers
+        description: "raw suppliers data from s3"
+        freshness:
+          warn_after: {count: 7, period: day}
+          error_after: {count: 30, period: day}
+        loaded_at_field: ingested_at
+
+      - name: warehouses
+        description: "raw warehouses data from s3"
+        freshness:
+          warn_after: {count: 7, period: day}
+          error_after: {count: 30, period: day}
+        loaded_at_field: ingested_at
+
+      - name: stores
+        description: "raw stores data from google sheets"
+        freshness:
+          warn_after: {count: 7, period: day}
+          error_after: {count: 30, period: day}
+        loaded_at_field: ingested_at
+
+      - name: inventory
+        description: "raw daily inventory snapshots from s3"
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 3, period: day}
+        loaded_at_field: ingested_at
+
+      - name: shipments
+        description: "raw shipment delivery logs from s3"
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 3, period: day}
+        loaded_at_field: ingested_at
+
+      - name: sales
+        description: "raw sales transactions from postgres"
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 3, period: day}
+        loaded_at_field: ingested_at

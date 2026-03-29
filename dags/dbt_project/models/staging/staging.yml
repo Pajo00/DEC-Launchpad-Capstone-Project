@@ -1,0 +1,122 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: "cleaned and standardized products data from raw layer"
+    columns:
+      - name: product_id
+        description: "unique identifier for each product"
+        data_tests:
+          - unique
+          - not_null
+      - name: supplier_id
+        description: "foreign key to suppliers"
+        data_tests:
+          - not_null
+      - name: unit_price
+        description: "price per unit of the product"
+        data_tests:
+          - not_null
+
+  - name: stg_suppliers
+    description: "cleaned and standardized suppliers data from raw layer"
+    columns:
+      - name: supplier_id
+        description: "unique identifier for each supplier"
+        data_tests:
+          - unique
+          - not_null
+      - name: supplier_name
+        description: "name of the supplier"
+        data_tests:
+          - not_null
+
+  - name: stg_warehouses
+    description: "cleaned and standardized warehouses data from raw layer"
+    columns:
+      - name: warehouse_id
+        description: "unique identifier for each warehouse"
+        data_tests:
+          - unique
+          - not_null
+      - name: city
+        description: "city where warehouse is located"
+        data_tests:
+          - not_null
+
+  - name: stg_stores
+    description: "cleaned and standardized stores data from google sheets"
+    columns:
+      - name: store_id
+        description: "unique identifier for each store"
+        data_tests:
+          - unique
+          - not_null
+      - name: region
+        description: "regional grouping of the store"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['West', 'East', 'South', 'North', 'Midwest']
+
+  - name: stg_inventory
+    description: "cleaned daily inventory snapshots"
+    columns:
+      - name: warehouse_id
+        description: "foreign key to warehouses"
+        data_tests:
+          - not_null
+      - name: product_id
+        description: "foreign key to products"
+        data_tests:
+          - not_null
+      - name: snapshot_date
+        description: "date of the inventory snapshot"
+        data_tests:
+          - not_null
+      - name: quantity_available
+        description: "number of units available in warehouse"
+        data_tests:
+          - not_null
+      - name: is_low_stock
+        description: "flag indicating stock is below reorder threshold"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [true, false]
+
+  - name: stg_shipments
+    description: "cleaned shipment delivery logs"
+    columns:
+      - name: shipment_id
+        description: "unique identifier for each shipment"
+        data_tests:
+          - unique
+          - not_null
+      - name: carrier
+        description: "shipping carrier name"
+        data_tests:
+          - not_null
+      - name: is_late_delivery
+        description: "flag indicating if delivery arrived after expected date"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [true, false]
+
+  - name: stg_sales
+    description: "cleaned sales transactions from postgres"
+    columns:
+      - name: transaction_id
+        description: "unique identifier for each transaction"
+        data_tests:
+          - unique
+          - not_null
+      - name: sale_amount
+        description: "total sale amount after discount"
+        data_tests:
+          - not_null
+      - name: quantity_sold
+        description: "number of units sold in transaction"
+        data_tests:
+          - not_null

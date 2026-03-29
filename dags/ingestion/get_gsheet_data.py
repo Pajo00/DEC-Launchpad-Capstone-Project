@@ -9,12 +9,11 @@ import gspread
 # destination bucket
 dest_bucket = "dec-capstone-joshua-raw-data"
 
-# google sheet id from environment variable
-SHEET_ID = os.environ.get("GOOGLE_SHEET_ID")
+# google sheet id
+SHEET_ID = '1vfAfvWLCW3_juM6XiP0ChPEqy1pN6lncLTY-ClxMtN8'
 
 
 def get_boto3_client(conn_id, region, service):
-    # a wrapper function around boto3 to interact with aws
     hook = AwsBaseHook(aws_conn_id=conn_id, region_name=region, client_type=service)
     return hook.get_client_type()
 
