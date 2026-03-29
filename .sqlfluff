@@ -1,0 +1,12 @@
+[sqlfluff]
+dialect = redshift
+templater = jinja
+
+# Only formatting rules, no deep logic checks
+rules = L001,L002,L003,L004,L005,L006,L007,L008,L009,L010,L011,L012,L013,L014
+
+# Ignore some noisy rules
+exclude_rules = L031,L034, AL01, LT01, LT02, LT12, CP02, LT03
+
+[sqlfluff:templater:dbt]
+project_dir = .
