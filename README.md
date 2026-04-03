@@ -54,7 +54,7 @@ To set up and run the Supplychain360 Data Platform, follow these steps:
    - `initialize_redshift`: This DAG initializes Redshift AutoCopy for efficient data loading and triggers the `supplychain360_dag` DAG.
    - `supplychain360_dag`: This DAG orchestrates the data ingestion, transformation, and loading processes.
 6. **Monitor and Maintain**: Use Airflow's UI to monitor the DAG runs and ensure that the data pipeline is functioning correctly.
-7. **Access PowerBI dashboard**: open the 'PowerBI dashboard' to view the dashboard ![Dashboard](./dashboard.png) 
+7. **Create PowerBI dashboard**: Connect redshift5 to your BI tool (in this case PowerBI) and create the charts... This is an example of how the powerbi dashbaord should look like. ![Dashboard](./dashboard.png) 
 
 8. **CI/CD**: The project includes GitHub Actions workflows for continuous integration and deployment. Ensure that your code passes the CI checks before merging changes.
 
