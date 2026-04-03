@@ -1,7 +1,6 @@
 import pandas as pd
 import io
 from datetime import datetime
-import boto3
 from sqlalchemy import create_engine, text
 from airflow.providers.amazon.aws.hooks.base_aws import AwsBaseHook
 

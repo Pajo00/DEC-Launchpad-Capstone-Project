@@ -1,6 +1,5 @@
 import pandas as pd
 import io
-import os
 from datetime import datetime
 from airflow.providers.amazon.aws.hooks.base_aws import AwsBaseHook
 from airflow.providers.google.common.hooks.base_google import GoogleBaseHook
