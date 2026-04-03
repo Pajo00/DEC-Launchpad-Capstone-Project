@@ -1,5 +1,5 @@
 -- create raw schema to hold ingested data
-CREATE SCHEMA IF NOT EXISTS raw;
+CREATE SCHEMA IF NOT EXISTS "raw";
 
 -- create staging schema for cleaned data
 CREATE SCHEMA IF NOT EXISTS staging;
