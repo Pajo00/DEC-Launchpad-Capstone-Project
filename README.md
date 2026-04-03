@@ -55,6 +55,7 @@ To set up and run the Supplychain360 Data Platform, follow these steps:
    - `supplychain360_dag`: This DAG orchestrates the data ingestion, transformation, and loading processes.
 6. **Monitor and Maintain**: Use Airflow's UI to monitor the DAG runs and ensure that the data pipeline is functioning correctly.
 7. **Access PowerBI dashboard**: open the 'PowerBI dashboard' to view the dashboard ![Dashboard](./dashboard.png) 
+
 8. **CI/CD**: The project includes GitHub Actions workflows for continuous integration and deployment. Ensure that your code passes the CI checks before merging changes.
 
 ## Choice of Tools and Technologies
